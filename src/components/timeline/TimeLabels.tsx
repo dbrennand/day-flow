@@ -3,16 +3,17 @@ import { toMinutes } from '../../utils/time'
 interface TimeLabelsProps {
   dayStart: string
   dayEnd: string
+  use24Hour?: boolean
 }
 
-function formatHourLabel(hour: number): string {
-  if (hour === 0 || hour === 24) return '12a'
-  if (hour === 12) return '12p'
-  if (hour < 12) return `${hour}a`
-  return `${hour - 12}p`
+function formatHourLabel(hour: number, use24Hour: boolean): string {
+  if (use24Hour) return `${String(hour % 24).padStart(2, '0')}:00`
+  if (hour === 0 || hour === 24) return '12am'
+  if (hour === 12) return '12pm'
+  return hour < 12 ? `${hour}am` : `${hour - 12}pm`
 }
 
-export function TimeLabels({ dayStart, dayEnd }: TimeLabelsProps) {
+export function TimeLabels({ dayStart, dayEnd, use24Hour = false }: TimeLabelsProps) {
   const dayStartMin = toMinutes(dayStart)
   const dayEndMin = toMinutes(dayEnd)
   const daySpan = dayEndMin - dayStartMin
@@ -36,7 +37,7 @@ export function TimeLabels({ dayStart, dayEnd }: TimeLabelsProps) {
             className="absolute -translate-x-1/2 text-xs text-stone-400 select-none"
             style={{ left: `${pct}%` }}
           >
-            {formatHourLabel(hour)}
+            {formatHourLabel(hour, use24Hour)}
           </span>
         )
       })}

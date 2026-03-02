@@ -13,6 +13,7 @@ export interface Task {
 export interface DaySettings {
   dayStartTime: string     // "HH:MM"
   dayEndTime: string       // "HH:MM"
+  use24Hour: boolean
 }
 
 export interface AppState {

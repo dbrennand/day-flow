@@ -49,6 +49,24 @@ export function DayBoundsForm({ settings, onSave, onClearDay }: DayBoundsFormPro
         {error && (
           <p className="text-xs text-red-600">{error}</p>
         )}
+        <div className="flex items-center justify-between">
+          <label className="text-xs font-medium text-stone-500 uppercase tracking-wide">
+            24-hour time
+          </label>
+          <button
+            type="button"
+            onClick={() => onSave({ ...settings, use24Hour: !settings.use24Hour })}
+            className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
+              settings.use24Hour ? 'bg-stone-700' : 'bg-cream-300'
+            }`}
+            aria-checked={settings.use24Hour}
+            role="switch"
+          >
+            <span className={`inline-block h-3.5 w-3.5 rounded-full bg-white shadow transition-transform ${
+              settings.use24Hour ? 'translate-x-4' : 'translate-x-1'
+            }`} />
+          </button>
+        </div>
       </div>
 
       <div className="pt-2 border-t border-cream-200">

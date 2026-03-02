@@ -38,6 +38,7 @@ export const DEFAULT_STATE: AppState = {
   settings: {
     dayStartTime: DEFAULT_DAY_START,
     dayEndTime: DEFAULT_DAY_END,
+    use24Hour: false,
   },
   isFocusMode: false,
   activeTaskId: null,

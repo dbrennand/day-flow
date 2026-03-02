@@ -19,7 +19,7 @@ import { TaskBlock } from './TaskBlock'
 export function Timeline() {
   const { state, dispatch } = useAppContext()
   const { tasks, settings, isFocusMode } = state
-  const { dayStartTime, dayEndTime } = settings
+  const { dayStartTime, dayEndTime, use24Hour } = settings
   const now = useNow()
   const trackRef = useRef<HTMLDivElement>(null)
 
@@ -63,7 +63,7 @@ export function Timeline() {
           <NowIndicator dayStart={effectiveDayStart} dayEnd={effectiveDayEnd} />
         </div>
       </DndContext>
-      <TimeLabels dayStart={effectiveDayStart} dayEnd={effectiveDayEnd} />
+      <TimeLabels dayStart={effectiveDayStart} dayEnd={effectiveDayEnd} use24Hour={use24Hour} />
     </div>
   )
 }
