@@ -50,8 +50,15 @@ export function TaskBlock({ task, dayStart, dayEnd, trackRef }: TaskBlockProps) 
 
   const { left, width } = taskToTimelinePosition(task.startTime, localDuration, dayStart, dayEnd)
 
+  const clampedLeft = Math.max(0, left)
+  const clampedWidth = Math.max(0, left < 0 ? width + left : width)
+  const isClippedLeft = left < 0
+
   // Resize state
   const resizeState = useRef<{ startX: number; startDuration: number } | null>(null)
+
+  // Don't render tasks that fall entirely outside the visible window (must be after all hooks)
+  if (left + width <= 0 || left >= 100) return null
 
   function handleResizePointerDown(e: React.PointerEvent) {
     e.stopPropagation()
@@ -88,12 +95,13 @@ export function TaskBlock({ task, dayStart, dayEnd, trackRef }: TaskBlockProps) 
     <div
       ref={setNodeRef}
       style={{
-        left: `${left}%`,
-        width: `max(2rem, ${width}%)`,
+        left: `${clampedLeft}%`,
+        width: `max(2rem, ${clampedWidth}%)`,
         ...dragStyle,
       }}
       className={[
-        'absolute top-2 bottom-2 rounded-xl cursor-pointer select-none flex items-center shadow-[var(--shadow-task)]',
+        'absolute top-2 bottom-2 cursor-pointer select-none flex items-center shadow-[var(--shadow-task)]',
+        isClippedLeft ? 'rounded-r-xl' : 'rounded-xl',
         colorMap[task.color],
         task.completed ? 'opacity-50' : '',
         isAnimating ? 'animate-[task-complete_0.4s_ease-out]' : '',
