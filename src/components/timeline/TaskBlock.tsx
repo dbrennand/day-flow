@@ -94,6 +94,7 @@ export function TaskBlock({ task, dayStart, dayEnd, trackRef }: TaskBlockProps) 
   return (
     <div
       ref={setNodeRef}
+      data-task-id={task.id}
       style={{
         left: `${clampedLeft}%`,
         width: `max(2rem, ${clampedWidth}%)`,
