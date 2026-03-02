@@ -1,73 +1,55 @@
-# React + TypeScript + Vite
+# DayFlow
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A calm, visually-driven daily planner for people who struggle with time awareness and task overwhelm.
 
-Currently, two official plugins are available:
+DayFlow presents your day as a single, honest visual timeline — making the passage of time tangible and keeping your task load manageable. The experience is minimal, soft, and free of guilt.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+> [!NOTE]
+> This application was created entirely using [Claude Code](https://claude.ai/claude-code), powered by claude-sonnet-4-6.
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Visual day timeline** — a full-width bar representing your day from start to end, with task blocks placed proportionally by time
+- **Live "Now" indicator** — a soft vertical line that tracks the current moment in real time
+- **Task management** — add, edit, move, and complete tasks with minimal friction; each task optionally supports Markdown notes
+- **Focus mode** — zoom the timeline into just the next 2 hours when the full day feels like too much
+- **Breathing room warning** — a gentle, dismissable nudge if your tasks fill more than ~80% of your available day
+- **End-of-day summary** — a warm, non-judgmental summary when your day ends
+- **Day settings** — configure your day start/end times and 12/24-hour clock preference; all data persists in local storage
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- [@dnd-kit](https://dndkit.com/) for drag-and-drop timeline interactions
+- [react-markdown](https://github.com/remarkjs/react-markdown) for task notes rendering
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+**Prerequisites:** Node.js 18+
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The app will be available at `http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Available Scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Command            | Description                          |
+| ------------------ | ------------------------------------ |
+| `npm run dev`      | Start the dev server with hot reload |
+| `npm run build`    | Type-check and build for production  |
+| `npm run preview`  | Preview the production build locally |
+| `npm run lint`     | Run ESLint                           |
+| `npm run format`   | Format all files with Prettier       |
+| `npm run lint:fix` | Format and auto-fix lint issues      |
+
+## Data
+
+All data (tasks and settings) is stored in the browser's local storage — no account, login, or server required. Use the **Clear Day** button in settings to reset tasks for a new day.
