@@ -5,7 +5,7 @@ A calm, visually-driven daily planner for people who struggle with time awarenes
 DayFlow presents your day as a single, honest visual timeline — making the passage of time tangible and keeping your task load manageable. The experience is minimal, soft, and free of guilt.
 
 > [!NOTE]
-> This application was created entirely using [Claude Code](https://claude.ai/claude-code), powered by claude-sonnet-4-6.
+> This application was created entirely using [Claude Code](https://claude.ai/), powered by claude-sonnet-4-6.
 
 ## Features
 
