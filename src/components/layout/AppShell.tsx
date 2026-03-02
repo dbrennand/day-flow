@@ -6,6 +6,8 @@ import { useNow } from '../../hooks/useNow'
 import { Header } from './Header'
 import { Timeline } from '../timeline/Timeline'
 import { TaskPanel } from '../tasks/TaskPanel'
+import { DayStats } from '../tasks/DayStats'
+import { TaskAgenda } from '../tasks/TaskAgenda'
 import { SettingsPanel } from '../settings/SettingsPanel'
 import { FocusModeBanner } from '../focus/FocusModeBanner'
 import { Button } from '../ui/Button'
@@ -34,6 +36,8 @@ export function AppShell() {
       {isFocusMode && <FocusModeBanner />}
       <main className="flex flex-1 flex-col">
         <Timeline />
+        <DayStats />
+        <TaskAgenda />
       </main>
       <TaskPanel />
       <SettingsPanel />
