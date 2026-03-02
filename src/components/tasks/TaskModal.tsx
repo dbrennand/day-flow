@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useAppContext } from '../../store/AppContext'
 import { updateTask, deleteTask, toggleComplete, setActiveTask } from '../../store/actions'
 import type { Task } from '../../types'
-import { formatDisplayTime } from '../../utils/time'
+import { formatDisplayTime, fromMinutes, toMinutes } from '../../utils/time'
 import { Button } from '../ui/Button'
 import { Modal } from '../ui/Modal'
 import { TaskForm } from './TaskForm'
@@ -55,8 +55,12 @@ export function TaskModal() {
             <div className="space-y-1">
               <p className="text-xs font-medium tracking-wide text-stone-500 uppercase">Time</p>
               <p className="text-sm text-stone-700">
-                {formatDisplayTime(activeTask.startTime, use24Hour)} · {activeTask.durationMinutes}{' '}
-                min
+                {formatDisplayTime(activeTask.startTime, use24Hour)} –{' '}
+                {formatDisplayTime(
+                  fromMinutes(toMinutes(activeTask.startTime) + activeTask.durationMinutes),
+                  use24Hour
+                )}{' '}
+                · {activeTask.durationMinutes} min
               </p>
             </div>
 

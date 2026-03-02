@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useAppContext } from '../../store/AppContext'
 import { addTask } from '../../store/actions'
 import { TASK_COLOR_ROTATION } from '../../constants'
-import { formatDisplayTime } from '../../utils/time'
+import { formatDisplayTime, fromMinutes, toMinutes } from '../../utils/time'
 import { Modal } from '../ui/Modal'
 import { Button } from '../ui/Button'
 
@@ -45,7 +45,9 @@ export function CreateTaskModal({ startTime, durationMinutes, onClose }: CreateT
       <div className="mb-4">
         <h2 className="text-base font-semibold text-stone-800">New task</h2>
         <p className="mt-0.5 text-xs text-stone-500">
-          {formatDisplayTime(startTime, use24Hour)} · {durationMinutes} min
+          {formatDisplayTime(startTime, use24Hour)} –{' '}
+          {formatDisplayTime(fromMinutes(toMinutes(startTime) + durationMinutes), use24Hour)} ·{' '}
+          {durationMinutes} min
         </p>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4">

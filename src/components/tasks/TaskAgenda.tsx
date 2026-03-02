@@ -53,8 +53,12 @@ export function TaskAgenda() {
             {task.name}
           </span>
           <span className="shrink-0 text-sm text-stone-400">
-            {use24Hour ? task.startTime : formatDisplayTime(task.startTime)} ·{' '}
-            {task.durationMinutes} min
+            {formatDisplayTime(task.startTime, use24Hour)} –{' '}
+            {formatDisplayTime(
+              fromMinutes(toMinutes(task.startTime) + task.durationMinutes),
+              use24Hour
+            )}{' '}
+            · {task.durationMinutes} min
           </span>
           <input
             type="checkbox"
