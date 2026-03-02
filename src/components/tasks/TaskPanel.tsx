@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useAppContext } from '../../store/AppContext'
-import { addTask, updateTask, deleteTask, toggleComplete, setActiveTask } from '../../store/actions'
+import { updateTask, deleteTask, toggleComplete, setActiveTask } from '../../store/actions'
 import type { Task } from '../../types'
 import { formatDisplayTime } from '../../utils/time'
 import { Button } from '../ui/Button'
@@ -13,27 +13,22 @@ export function TaskPanel() {
   const { activeTaskId, tasks } = state
 
   const isOpen = activeTaskId !== null
-  const isNew = activeTaskId === 'new'
-  const activeTask = isNew ? undefined : tasks.find((t) => t.id === activeTaskId)
+  const activeTask = tasks.find((t) => t.id === activeTaskId)
 
   const [mode, setMode] = useState<'view' | 'edit'>('view')
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 
   useEffect(() => {
-    setMode(isNew ? 'edit' : 'view') // eslint-disable-line react-hooks/set-state-in-effect
+    setMode('view') // eslint-disable-line react-hooks/set-state-in-effect
     setShowDeleteConfirm(false)
-  }, [activeTaskId, isNew])
+  }, [activeTaskId])
 
   function handleClose() {
     dispatch(setActiveTask(null))
   }
 
   function handleSave(task: Task) {
-    if (isNew) {
-      dispatch(addTask(task))
-    } else {
-      dispatch(updateTask(task))
-    }
+    dispatch(updateTask(task))
     dispatch(setActiveTask(null))
   }
 
@@ -63,7 +58,7 @@ export function TaskPanel() {
         {/* Header */}
         <div className="border-cream-200 flex items-center justify-between border-b px-5 py-4">
           <h2 className="text-sm font-semibold text-stone-700">
-            {isNew ? 'New Task' : mode === 'edit' ? 'Edit Task' : (activeTask?.name ?? '')}
+            {mode === 'edit' ? 'Edit Task' : (activeTask?.name ?? '')}
           </h2>
           <button
             onClick={handleClose}
@@ -86,15 +81,11 @@ export function TaskPanel() {
 
         {/* Body */}
         <div className="flex-1 overflow-y-auto px-5 py-4">
-          {(isNew || mode === 'edit') && (
-            <TaskForm
-              task={activeTask}
-              onSave={handleSave}
-              onCancel={isNew ? handleClose : () => setMode('view')}
-            />
+          {mode === 'edit' && (
+            <TaskForm task={activeTask} onSave={handleSave} onCancel={() => setMode('view')} />
           )}
 
-          {!isNew && mode === 'view' && activeTask && (
+          {mode === 'view' && activeTask && (
             <div className="space-y-4">
               {/* Time info */}
               <div className="space-y-1">
