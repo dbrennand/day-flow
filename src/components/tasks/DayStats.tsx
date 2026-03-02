@@ -23,7 +23,7 @@ export function DayStats() {
   const completedCount = tasks.filter((t) => t.completed).length
 
   return (
-    <div className="border-cream-200 flex items-center gap-4 border-b px-6 py-3 text-sm text-stone-500">
+    <div className="border-cream-200 flex items-center gap-4 border-b px-6 py-3 text-base text-stone-500">
       <span>
         <strong className="text-stone-700">{formatDuration(totalScheduledMin)}</strong> scheduled
       </span>

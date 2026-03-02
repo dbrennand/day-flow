@@ -5,7 +5,7 @@ import { toMinutes } from '../../utils/time'
 import { useNow } from '../../hooks/useNow'
 import { Header } from './Header'
 import { Timeline } from '../timeline/Timeline'
-import { TaskPanel } from '../tasks/TaskPanel'
+import { TaskModal } from '../tasks/TaskModal'
 import { DayStats } from '../tasks/DayStats'
 import { TaskAgenda } from '../tasks/TaskAgenda'
 import { SettingsPanel } from '../settings/SettingsPanel'
@@ -35,7 +35,7 @@ export function AppShell() {
         <DayStats />
         <TaskAgenda />
       </main>
-      <TaskPanel />
+      <TaskModal />
       <SettingsPanel />
 
       {/* End-of-day overlay */}
@@ -58,11 +58,11 @@ export function AppShell() {
             </div>
             <div className="space-y-1">
               <h2 className="text-2xl font-semibold text-stone-700">That's the day done.</h2>
-              <p className="text-stone-500">
+              <p className="text-lg text-stone-500">
                 {completedCount} of {tasks.length} task{tasks.length !== 1 ? 's' : ''} completed
               </p>
             </div>
-            <p className="text-sm text-stone-400">Rest well.</p>
+            <p className="text-base text-stone-400">Rest well.</p>
             <Button variant="ghost" onClick={() => dispatch(setEndOfDay(false))} className="mt-2">
               Dismiss
             </Button>

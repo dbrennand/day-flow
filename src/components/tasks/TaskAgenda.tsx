@@ -30,7 +30,7 @@ export function TaskAgenda() {
 
   if (visibleTasks.length === 0) {
     return (
-      <p className="px-6 py-8 text-center text-sm text-stone-400">
+      <p className="px-6 py-8 text-center text-base text-stone-400">
         No tasks yet — click <strong>+ Add Task</strong> to plan your day.
       </p>
     )
@@ -48,11 +48,11 @@ export function TaskAgenda() {
         >
           <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${colorMap[task.color]}`} />
           <span
-            className={`flex-1 truncate text-sm ${task.completed ? 'text-stone-400 line-through' : 'text-stone-700'}`}
+            className={`flex-1 truncate text-base ${task.completed ? 'text-stone-400 line-through' : 'text-stone-700'}`}
           >
             {task.name}
           </span>
-          <span className="shrink-0 text-xs text-stone-400">
+          <span className="shrink-0 text-sm text-stone-400">
             {use24Hour ? task.startTime : formatDisplayTime(task.startTime)} ·{' '}
             {task.durationMinutes} min
           </span>

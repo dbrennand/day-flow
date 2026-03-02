@@ -62,9 +62,9 @@ export function pixelToTime(
   return fromMinutes(clamped)
 }
 
-export function formatDisplayTime(hhmm: string): string {
+export function formatDisplayTime(hhmm: string, use24Hour = false): string {
   const d = parse(hhmm, 'HH:mm', BASE)
-  return format(d, 'h:mm a')
+  return use24Hour ? format(d, 'HH:mm') : format(d, 'h:mm a')
 }
 
 export function getTimeOfDay(hhmm: string): 'morning' | 'midday' | 'evening' {
