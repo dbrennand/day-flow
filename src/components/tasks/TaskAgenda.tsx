@@ -21,7 +21,7 @@ export function TaskAgenda() {
 
   const focusEnd = fromMinutes(Math.min(toMinutes(now) + 120, toMinutes(dayEndTime)))
   const visibleTasks = isFocusMode
-    ? tasks.filter(t => {
+    ? tasks.filter((t) => {
         const start = toMinutes(t.startTime)
         const end = start + t.durationMinutes
         return end > toMinutes(now) && start < toMinutes(focusEnd)
@@ -30,7 +30,7 @@ export function TaskAgenda() {
 
   if (visibleTasks.length === 0) {
     return (
-      <p className="px-6 py-8 text-sm text-stone-400 text-center">
+      <p className="px-6 py-8 text-center text-sm text-stone-400">
         No tasks yet — click <strong>+ Add Task</strong> to plan your day.
       </p>
     )
@@ -40,25 +40,28 @@ export function TaskAgenda() {
 
   return (
     <div>
-      {sorted.map(task => (
+      {sorted.map((task) => (
         <div
           key={task.id}
-          className="px-6 py-3 flex items-center gap-3 hover:bg-cream-100 cursor-pointer border-b border-cream-100"
+          className="hover:bg-cream-100 border-cream-100 flex cursor-pointer items-center gap-3 border-b px-6 py-3"
           onClick={() => dispatch(setActiveTask(task.id))}
         >
-          <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${colorMap[task.color]}`} />
-          <span className={`flex-1 truncate text-sm ${task.completed ? 'line-through text-stone-400' : 'text-stone-700'}`}>
+          <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${colorMap[task.color]}`} />
+          <span
+            className={`flex-1 truncate text-sm ${task.completed ? 'text-stone-400 line-through' : 'text-stone-700'}`}
+          >
             {task.name}
           </span>
-          <span className="text-xs text-stone-400 shrink-0">
-            {use24Hour ? task.startTime : formatDisplayTime(task.startTime)} · {task.durationMinutes} min
+          <span className="shrink-0 text-xs text-stone-400">
+            {use24Hour ? task.startTime : formatDisplayTime(task.startTime)} ·{' '}
+            {task.durationMinutes} min
           </span>
           <input
             type="checkbox"
             checked={task.completed}
             className="shrink-0 cursor-pointer"
             onChange={() => {}}
-            onClick={e => {
+            onClick={(e) => {
               e.stopPropagation()
               dispatch(toggleComplete(task.id))
             }}

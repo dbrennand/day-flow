@@ -3,7 +3,7 @@ export type TaskColor = 'blue' | 'green' | 'yellow' | 'pink' | 'purple' | 'orang
 export interface Task {
   id: string
   name: string
-  startTime: string        // "HH:MM"
+  startTime: string // "HH:MM"
   durationMinutes: number
   notes?: string
   completed: boolean
@@ -11,8 +11,8 @@ export interface Task {
 }
 
 export interface DaySettings {
-  dayStartTime: string     // "HH:MM"
-  dayEndTime: string       // "HH:MM"
+  dayStartTime: string // "HH:MM"
+  dayEndTime: string // "HH:MM"
   use24Hour: boolean
 }
 

@@ -32,13 +32,13 @@ export function TaskBlock({ task, dayStart, dayEnd, trackRef }: TaskBlockProps) 
 
   // Sync localDuration when task prop changes (e.g., from drag end or external update)
   useEffect(() => {
-    setLocalDuration(task.durationMinutes)
+    setLocalDuration(task.durationMinutes) // eslint-disable-line react-hooks/set-state-in-effect
   }, [task.durationMinutes])
 
   // Trigger animation when completed toggles to true
   useEffect(() => {
     if (task.completed && !prevCompleted.current) {
-      setIsAnimating(true)
+      setIsAnimating(true) // eslint-disable-line react-hooks/set-state-in-effect
       const timer = setTimeout(() => setIsAnimating(false), 400)
       prevCompleted.current = task.completed
       return () => clearTimeout(timer)
@@ -100,32 +100,34 @@ export function TaskBlock({ task, dayStart, dayEnd, trackRef }: TaskBlockProps) 
         ...dragStyle,
       }}
       className={[
-        'absolute top-2 bottom-2 cursor-pointer select-none flex items-center shadow-[var(--shadow-task)]',
+        'absolute top-2 bottom-2 flex cursor-pointer items-center shadow-[var(--shadow-task)] select-none',
         isClippedLeft ? 'rounded-r-xl' : 'rounded-xl',
         colorMap[task.color],
         task.completed ? 'opacity-50' : '',
         isAnimating ? 'animate-[task-complete_0.4s_ease-out]' : '',
         isDragging ? 'opacity-80' : '',
-      ].filter(Boolean).join(' ')}
+      ]
+        .filter(Boolean)
+        .join(' ')}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => dispatch(setActiveTask(task.id))}
       {...listeners}
       {...attributes}
     >
-      <span className={`px-2 text-xs font-medium text-stone-700 truncate flex-1 ${task.completed ? 'line-through' : ''}`}>
+      <span
+        className={`flex-1 truncate px-2 text-xs font-medium text-stone-700 ${task.completed ? 'line-through' : ''}`}
+      >
         {task.name}
       </span>
-      {task.notes && (
-        <span className="w-1.5 h-1.5 rounded-full bg-stone-500/40 shrink-0 mr-2" />
-      )}
+      {task.notes && <span className="mr-2 h-1.5 w-1.5 shrink-0 rounded-full bg-stone-500/40" />}
       {/* Resize handle */}
       <div
-        className="w-4 absolute right-0 top-0 bottom-0 cursor-ew-resize touch-none rounded-r-xl"
+        className="absolute top-0 right-0 bottom-0 w-4 cursor-ew-resize touch-none rounded-r-xl"
         onPointerDown={handleResizePointerDown}
         onPointerMove={handleResizePointerMove}
         onPointerUp={handleResizePointerUp}
-        onClick={e => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
       />
     </div>
   )

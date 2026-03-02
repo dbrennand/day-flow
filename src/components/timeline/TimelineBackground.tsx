@@ -25,10 +25,5 @@ export function TimelineBackground({ dayStart, dayEnd }: TimelineBackgroundProps
     #f3e0ff 100%
   )`
 
-  return (
-    <div
-      className="absolute inset-0 rounded-2xl"
-      style={{ background: gradient }}
-    />
-  )
+  return <div className="absolute inset-0 rounded-2xl" style={{ background: gradient }} />
 }

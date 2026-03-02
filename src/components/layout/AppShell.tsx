@@ -19,16 +19,12 @@ export function AppShell() {
   const now = useNow()
 
   useEffect(() => {
-    if (
-      toMinutes(now) >= toMinutes(dayEndTime) &&
-      tasks.length > 0 &&
-      !isEndOfDay
-    ) {
+    if (toMinutes(now) >= toMinutes(dayEndTime) && tasks.length > 0 && !isEndOfDay) {
       dispatch(setEndOfDay(true))
     }
   }, [now, dayEndTime, tasks.length, isEndOfDay, dispatch])
 
-  const completedCount = tasks.filter(t => t.completed).length
+  const completedCount = tasks.filter((t) => t.completed).length
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -44,11 +40,19 @@ export function AppShell() {
 
       {/* End-of-day overlay */}
       {isEndOfDay && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-cream-100/90 backdrop-blur-sm animate-[fade-in_0.3s_ease-out]">
-          <div className="text-center space-y-4 animate-[slide-up_0.4s_ease-out]">
+        <div className="bg-cream-100/90 fixed inset-0 z-50 flex animate-[fade-in_0.3s_ease-out] items-center justify-center backdrop-blur-sm">
+          <div className="animate-[slide-up_0.4s_ease-out] space-y-4 text-center">
             {/* Moon icon */}
             <div className="flex justify-center">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-stone-400">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                className="text-stone-400"
+              >
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
               </svg>
             </div>
@@ -58,12 +62,8 @@ export function AppShell() {
                 {completedCount} of {tasks.length} task{tasks.length !== 1 ? 's' : ''} completed
               </p>
             </div>
-            <p className="text-stone-400 text-sm">Rest well.</p>
-            <Button
-              variant="ghost"
-              onClick={() => dispatch(setEndOfDay(false))}
-              className="mt-2"
-            >
+            <p className="text-sm text-stone-400">Rest well.</p>
+            <Button variant="ghost" onClick={() => dispatch(setEndOfDay(false))} className="mt-2">
               Dismiss
             </Button>
           </div>

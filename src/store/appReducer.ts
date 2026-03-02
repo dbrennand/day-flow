@@ -8,21 +8,21 @@ export function appReducer(state: AppState, action: AppAction): AppState {
     case 'UPDATE_TASK':
       return {
         ...state,
-        tasks: state.tasks.map(t => (t.id === action.payload.id ? action.payload : t)),
+        tasks: state.tasks.map((t) => (t.id === action.payload.id ? action.payload : t)),
       }
 
     case 'DELETE_TASK':
       return {
         ...state,
-        tasks: state.tasks.filter(t => t.id !== action.payload),
+        tasks: state.tasks.filter((t) => t.id !== action.payload),
         activeTaskId: state.activeTaskId === action.payload ? null : state.activeTaskId,
       }
 
     case 'TOGGLE_COMPLETE':
       return {
         ...state,
-        tasks: state.tasks.map(t =>
-          t.id === action.payload ? { ...t, completed: !t.completed } : t,
+        tasks: state.tasks.map((t) =>
+          t.id === action.payload ? { ...t, completed: !t.completed } : t
         ),
       }
 

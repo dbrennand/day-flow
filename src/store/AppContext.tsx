@@ -20,6 +20,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   return <AppContext.Provider value={{ state, dispatch }}>{children}</AppContext.Provider>
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAppContext(): AppContextValue {
   const ctx = useContext(AppContext)
   if (!ctx) throw new Error('useAppContext must be used within AppProvider')

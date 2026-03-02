@@ -22,7 +22,7 @@ export function saveState(state: AppState): void {
   try {
     localStorage.setItem(
       STORAGE_KEY,
-      JSON.stringify({ tasks: state.tasks, settings: state.settings }),
+      JSON.stringify({ tasks: state.tasks, settings: state.settings })
     )
   } catch {
     // quota exceeded or private mode — silently ignore

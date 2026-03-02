@@ -30,14 +30,19 @@ export function Timeline() {
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 4 } }),
-    useSensor(TouchSensor, { activationConstraint: { delay: 150, tolerance: 5 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 150, tolerance: 5 } })
   )
 
   function handleDragEnd({ active, delta }: DragEndEvent) {
-    const task = tasks.find(t => t.id === active.id)
+    const task = tasks.find((t) => t.id === active.id)
     if (!task || !trackRef.current) return
     const containerWidth = trackRef.current.getBoundingClientRect().width
-    const { left } = taskToTimelinePosition(task.startTime, task.durationMinutes, effectiveDayStart, effectiveDayEnd)
+    const { left } = taskToTimelinePosition(
+      task.startTime,
+      task.durationMinutes,
+      effectiveDayStart,
+      effectiveDayEnd
+    )
     const newPixelX = (left / 100) * containerWidth + delta.x
     const newStartTime = pixelToTime(newPixelX, containerWidth, effectiveDayStart, effectiveDayEnd)
     dispatch(updateTask({ ...task, startTime: newStartTime }))
@@ -48,10 +53,10 @@ export function Timeline() {
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
         <div
           ref={trackRef}
-          className="relative h-24 w-full rounded-2xl overflow-hidden shadow-[var(--shadow-task)] select-none"
+          className="relative h-24 w-full overflow-hidden rounded-2xl shadow-[var(--shadow-task)] select-none"
         >
           <TimelineBackground dayStart={effectiveDayStart} dayEnd={effectiveDayEnd} />
-          {tasks.map(task => (
+          {tasks.map((task) => (
             <TaskBlock
               key={task.id}
               task={task}

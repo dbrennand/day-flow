@@ -1,9 +1,5 @@
 import { useAppContext } from '../store/AppContext'
-import {
-  taskToTimelinePosition,
-  nowToTimelinePercent,
-  pixelToTime,
-} from '../utils/time'
+import { taskToTimelinePosition, nowToTimelinePercent, pixelToTime } from '../utils/time'
 import type { Task } from '../types'
 
 export function useTimelineUtils() {
@@ -14,8 +10,7 @@ export function useTimelineUtils() {
     getTaskPosition: (task: Task) =>
       taskToTimelinePosition(task.startTime, task.durationMinutes, dayStartTime, dayEndTime),
 
-    getNowPercent: () =>
-      nowToTimelinePercent(dayStartTime, dayEndTime),
+    getNowPercent: () => nowToTimelinePercent(dayStartTime, dayEndTime),
 
     pixelToTime: (pixelX: number, containerWidth: number, snap?: number) =>
       pixelToTime(pixelX, containerWidth, dayStartTime, dayEndTime, snap),

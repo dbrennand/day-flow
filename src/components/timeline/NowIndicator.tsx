@@ -18,10 +18,10 @@ export function NowIndicator({ dayStart, dayEnd }: NowIndicatorProps) {
 
   return (
     <div
-      className="absolute top-0 bottom-0 w-0.5 bg-stone-500/60 pointer-events-none z-20"
+      className="pointer-events-none absolute top-0 bottom-0 z-20 w-0.5 bg-stone-500/60"
       style={{ left: `${pct}%` }}
     >
-      <div className="absolute -top-1 -translate-x-1/2 w-2 h-2 rounded-full bg-stone-500/70" />
+      <div className="absolute -top-1 h-2 w-2 -translate-x-1/2 rounded-full bg-stone-500/70" />
     </div>
   )
 }

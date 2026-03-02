@@ -27,8 +27,8 @@ export function TimeLabels({ dayStart, dayEnd, use24Hour = false }: TimeLabelsPr
   }
 
   return (
-    <div className="relative w-full h-6 mt-1">
-      {ticks.map(hour => {
+    <div className="relative mt-1 h-6 w-full">
+      {ticks.map((hour) => {
         const pct = ((hour * 60 - dayStartMin) / daySpan) * 100
         if (pct < 0 || pct > 100) return null
         return (

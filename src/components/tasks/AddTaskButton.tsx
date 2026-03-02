@@ -4,10 +4,7 @@ interface AddTaskButtonProps {
 
 export function AddTaskButton({ onClick }: AddTaskButtonProps) {
   return (
-    <button
-      onClick={onClick}
-      className="text-stone-400 p-4 text-sm underline"
-    >
+    <button onClick={onClick} className="p-4 text-sm text-stone-400 underline">
       + Add task
     </button>
   )

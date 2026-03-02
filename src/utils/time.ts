@@ -23,7 +23,7 @@ export function taskToTimelinePosition(
   startTime: string,
   durationMinutes: number,
   dayStart: string,
-  dayEnd: string,
+  dayEnd: string
 ): { left: number; width: number } {
   const dayStartMin = toMinutes(dayStart)
   const dayEndMin = toMinutes(dayEnd)
@@ -49,7 +49,7 @@ export function pixelToTime(
   containerWidth: number,
   dayStart: string,
   dayEnd: string,
-  snap: number = TIMELINE_SNAP_MINUTES,
+  snap: number = TIMELINE_SNAP_MINUTES
 ): string {
   const dayStartMin = toMinutes(dayStart)
   const dayEndMin = toMinutes(dayEnd)
@@ -78,7 +78,7 @@ export function isOverloaded(
   tasks: Task[],
   dayStart: string,
   dayEnd: string,
-  threshold: number,
+  threshold: number
 ): boolean {
   const daySpan = toMinutes(dayEnd) - toMinutes(dayStart)
 
